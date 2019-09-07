@@ -35,9 +35,7 @@ private:
       umrf.setEffect("synchronous");
 
       ActionParameters ap;
-      ActionParameters::ParameterContainer p0("verb", "string");
-      p0.setData(boost::any_cast<std::string>(std::string("stop")));
-      ap.setParameter(p0);
+      ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string("stop")));
       umrf.setInputParameters(ap);
 
       /*
@@ -61,13 +59,8 @@ private:
       umrf.setEffect("synchronous");
 
       ActionParameters ap;
-      ActionParameters::ParameterContainer p0("verb", "string");
-      p0.setData(boost::any_cast<std::string>(std::string("move")));
-      ap.setParameter(p0);
-
-      ActionParameters::ParameterContainer p1("direction", "string");
-      p1.setData(boost::any_cast<std::string>(std::string("forward")));
-      ap.setParameter(p1);
+      ap.setParameter("direction", "string", boost::any_cast<std::string>(std::string("forward")));
+      ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string("move")));
       umrf.setInputParameters(ap);
 
       /*
@@ -91,13 +84,8 @@ private:
       umrf.setEffect("synchronous");
 
       ActionParameters ap;
-      ActionParameters::ParameterContainer p0("verb", "string");
-      p0.setData(boost::any_cast<std::string>(std::string("move")));
-      ap.setParameter(p0);
-
-      ActionParameters::ParameterContainer p1("direction", "string");
-      p0.setData(boost::any_cast<std::string>(std::string("back")));
-      ap.setParameter(p1);
+      ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string("move")));
+      ap.setParameter("direction", "string", boost::any_cast<std::string>(std::string("back")));
       umrf.setInputParameters(ap);
 
       /*

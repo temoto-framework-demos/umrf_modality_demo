@@ -9,7 +9,7 @@ Components:
 - component_name: "Text to UMRF"
   component_type: "text_to_umrf"
   package_name: "text_to_umrf"
-  executable:  "text_to_umrf"
+  executable:  "tumrf_web_agent.py"
   input_topics:
     chatter_data: "chatter_data_topic"
   output_topics:
