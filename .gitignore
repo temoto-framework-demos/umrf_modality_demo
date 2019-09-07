@@ -2,9 +2,11 @@ build/
 devel/
 logs/
 lib/
+.vscode/
 .catkin_tools/
 .catkin_workspace
 src/CMakeLists.txt
+src/google_speech_to_text
 *.so
 *.swp
 *.user

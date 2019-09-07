@@ -1,1 +1,1 @@
-{"name":"TaMove", "effect": "synchronous", "suffix":"0", "input_parameters":{"distance":{"pvf_type":"number", "pvf_value":56.7},"verb":{"pvf_type":"string", "pvf_value":"move"}}}
+{"name":"MoveForward","suffix":"0","notation":"","effect":"synchronous","input_parameters":{"direction":{"pvf_type":"string", "pvf_value":"forward"},"verb":{"pvf_type":"string", "pvf_value":"move"}}}
