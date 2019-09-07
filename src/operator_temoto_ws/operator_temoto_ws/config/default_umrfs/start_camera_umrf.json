@@ -1,0 +1,1 @@
+{"name":"TaStartCamera", "suffix":"0","effect":"asynchronous","input_parameters":{"verb":{"pvf_type":"string", "pvf_value":"start"}, "noun":{"pvf_type":"string", "pvf_value":"camera"}}}

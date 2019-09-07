@@ -1,0 +1,7 @@
+Components:
+- component_name: "Google STT"
+  component_type: "stt"
+  package_name: "google_speech_to_text"
+  executable:  "speech_to_text.launch"
+  output_topics:
+    chatter_data: "chatter"
