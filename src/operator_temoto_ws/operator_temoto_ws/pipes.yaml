@@ -1,0 +1,12 @@
+---
+speech_to_umrf:
+- method:
+  - segment_type: "speech_to_text"
+    output_topic_types:
+      - chatter_data
+      
+  - segment_type: "text_to_umrf"
+    input_topic_types:
+      - chatter_data
+    output_topic_types:
+      - named_umrf_graph

@@ -1,7 +1,16 @@
 Components:
 - component_name: "Google STT"
-  component_type: "stt"
+  component_type: "speech_to_text"
   package_name: "google_speech_to_text"
   executable:  "speech_to_text.launch"
   output_topics:
     chatter_data: "chatter"
+
+- component_name: "Text to UMRF"
+  component_type: "text_to_umrf"
+  package_name: "text_to_umrf"
+  executable:  "text_to_umrf.launch"
+  input_topics:
+    chatter_data: "chatter"
+  output_topics:
+    named_umrf_graph: "named_umrf_graph"
