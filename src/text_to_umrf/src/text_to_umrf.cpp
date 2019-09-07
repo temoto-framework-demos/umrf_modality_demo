@@ -66,7 +66,7 @@ private:
       ap.setParameter(p0);
 
       ActionParameters::ParameterContainer p1("direction", "string");
-      p0.setData(boost::any_cast<std::string>(std::string("forward")));
+      p1.setData(boost::any_cast<std::string>(std::string("forward")));
       ap.setParameter(p1);
       umrf.setInputParameters(ap);
 
