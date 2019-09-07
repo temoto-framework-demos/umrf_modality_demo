@@ -1,1 +1,1 @@
-{"name":"TaNlpUmrf","package_name":"ta_nlp_umrf","effect":"asynchronous","input_parameters":{"verb":{"pvf_type":"string"}}}
+{"name":"TaNlpUmrf","package_name":"ta_nlp_umrf","effect":"asynchronous","input_parameters":{"speech_to_text":{"pvf_type":"string"}}}

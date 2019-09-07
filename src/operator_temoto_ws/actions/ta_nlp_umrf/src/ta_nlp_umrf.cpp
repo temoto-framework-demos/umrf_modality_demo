@@ -23,6 +23,7 @@
 #include "ta_nlp_umrf/macros.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "temoto_er_manager/temoto_er_manager_interface.h"
 #include "temoto_component_manager/component_manager_interface.h"
 #include "temoto_action_engine/UmrfJsonGraph.h"
 #include "temoto_action_engine/umrf_json_converter.h"
@@ -45,124 +46,30 @@ TaNlpUmrf()
 void executeTemotoAction()
 {
   // Input parameters
-  std::string verb = GET_PARAMETER("verb", std::string);
+  std::string verb = GET_PARAMETER("speech_to_text", std::string);
   
+  TEMOTO_INFO_STREAM("Invoking Speech To UMRF pipe ...");
   cmi_.initialize(this);
-  ComponentTopicsRes topics = cmi_.startComponent("stt");
-  std::string chatter_data_topic = topics.getOutputTopic("chatter_data");
+  ermi_.initialize(this);
 
-  TEMOTO_INFO_STREAM("Receiving chatter data on topic: " << chatter_data_topic);
-  chatter_sub_ = nh_.subscribe(chatter_data_topic, 1, &TaNlpUmrf::chatterSubscriber, this);
-  umrf_graph_pub_ = nh_.advertise<temoto_action_engine::UmrfJsonGraph>("/umrf_graph_topic", 1);
-}
+  temoto_core::TopicContainer pipe_topics = cmi_.startPipe("speech_to_umrf");
+  std::string umrf_graph_topic = pipe_topics.getOutputTopic("named_umrf_graph");
+  std::string relay_args = umrf_graph_topic + " " + "/umrf_graph_topic";
 
-/**
- * @brief chatter data subscriber callback
- * 
- * @param msg 
- */
-void chatterSubscriber(const std_msgs::String& msg)
-{
-  TEMOTO_INFO_STREAM("got: " << msg.data);
-
-  if (msg.data == "stop")
-  {
-    /*
-     * Construct UMRF manually
-     */ 
-    Umrf umrf;
-    umrf.setName("Stop");
-    umrf.setSuffix("0");
-    umrf.setEffect("synchronous");
-
-    ActionParameters ap;
-    ActionParameters::ParameterContainer p0("verb", "string");
-    p0.setData(boost::any_cast<std::string>(std::string("stop")));
-    ap.setParameter(p0);
-    umrf.setInputParameters(ap);
-
-    /*
-     * Construct UMRF graph message
-     */
-    temoto_action_engine::UmrfJsonGraph umrf_graph_msg;
-    umrf_graph_msg.graph_name = "Stop";
-    umrf_graph_msg.umrf_json_strings.push_back(umrf_json_converter::toUmrfJsonStr(umrf));
-    umrf_graph_msg.targets.push_back("Jack");
-    umrf_graph_pub_.publish(umrf_graph_msg);
-  }
-
-  else if (msg.data == "move forward")
-  {
-    /*
-     * Construct UMRF manually
-     */ 
-    Umrf umrf;
-    umrf.setName("MoveForward");
-    umrf.setSuffix("0");
-    umrf.setEffect("synchronous");
-
-    ActionParameters ap;
-    ActionParameters::ParameterContainer p0("verb", "string");
-    p0.setData(boost::any_cast<std::string>(std::string("move")));
-    ap.setParameter(p0);
-
-    ActionParameters::ParameterContainer p1("direction", "string");
-    p0.setData(boost::any_cast<std::string>(std::string("forward")));
-    ap.setParameter(p1);
-    umrf.setInputParameters(ap);
-
-    /*
-     * Construct UMRF graph message
-     */
-    temoto_action_engine::UmrfJsonGraph umrf_graph_msg;
-    umrf_graph_msg.graph_name = "Move Forward Graph";
-    umrf_graph_msg.umrf_json_strings.push_back(umrf_json_converter::toUmrfJsonStr(umrf));
-    umrf_graph_msg.targets.push_back("Jack");
-    umrf_graph_pub_.publish(umrf_graph_msg);
-  }
-
-  else if (msg.data == "go back")
-  {
-    /*
-     * Construct UMRF manually
-     */ 
-    Umrf umrf;
-    umrf.setName("MoveBack");
-    umrf.setSuffix("0");
-    umrf.setEffect("synchronous");
-
-    ActionParameters ap;
-    ActionParameters::ParameterContainer p0("verb", "string");
-    p0.setData(boost::any_cast<std::string>(std::string("move")));
-    ap.setParameter(p0);
-
-    ActionParameters::ParameterContainer p1("direction", "string");
-    p0.setData(boost::any_cast<std::string>(std::string("back")));
-    ap.setParameter(p1);
-    umrf.setInputParameters(ap);
-
-    /*
-     * Construct UMRF graph message
-     */
-    temoto_action_engine::UmrfJsonGraph umrf_graph_msg;
-    umrf_graph_msg.graph_name = "Move Back Graph";
-    umrf_graph_msg.umrf_json_strings.push_back(umrf_json_converter::toUmrfJsonStr(umrf));
-    umrf_graph_msg.targets.push_back("Jack");
-    umrf_graph_pub_.publish(umrf_graph_msg);
-  }
+  TEMOTO_INFO_STREAM("Setting up a topic relay");
+  ermi_.loadResource("topic_tools", "relay", relay_args);
 }
 
 // Destructor
 ~TaNlpUmrf()
 {
   // ---> YOUR CONSTRUCTION ROUTINES HERE <--- //
-  TEMOTO_PRINT_OF("Destructor", getUmrfPtr()->getName());
+  TEMOTO_INFO_STREAM("Destructor");
 }
 
-ros::NodeHandle nh_;
 temoto_component_manager::ComponentManagerInterface<TaNlpUmrf> cmi_;
-ros::Subscriber chatter_sub_;
-ros::Publisher umrf_graph_pub_;
+temoto_er_manager::ERManagerInterface<TaNlpUmrf> ermi_;
+
 
 }; // TaNlpUmrf class
 

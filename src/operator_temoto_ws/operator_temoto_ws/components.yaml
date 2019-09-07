@@ -9,8 +9,8 @@ Components:
 - component_name: "Text to UMRF"
   component_type: "text_to_umrf"
   package_name: "text_to_umrf"
-  executable:  "text_to_umrf.launch"
+  executable:  "text_to_umrf"
   input_topics:
-    chatter_data: "chatter"
+    chatter_data: "chatter_data_topic"
   output_topics:
-    named_umrf_graph: "named_umrf_graph"
+    named_umrf_graph: "named_umrf_graph_topic"
