@@ -12,14 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   temoto_action_engine
+  message_generation
 )
-
 
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES text_to_umrf
-#  CATKIN_DEPENDS roscpp rospy std_msgs temoto_action_engine
-#  DEPENDS system_lib
+   CATKIN_DEPENDS message_runtime temoto_action_engine
+#  DEPENDS message_runtime
 )
 
 include_directories(
@@ -27,16 +27,24 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-# Parser node
-add_executable(text_to_umrf
-  src/text_to_umrf.cpp
-)
+#add_message_files(
+#  FILES
+#  UmrfJsonGraph.msg
+#)
 
-add_dependencies(text_to_umrf
-  ${catkin_EXPORTED_TARGETS}
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-)
-target_link_libraries(text_to_umrf
-  ${catkin_LIBRARIES}
-)  
+## Parser node
+#add_executable(text_to_umrf
+# # src/text_to_umrf.cpp
+# scripts/tumrf_web_agent.py
+#)
+#
+#add_dependencies(text_to_umrf
+#  scripts/tumrf_web_agent
+#  ${catkin_EXPORTED_TARGETS}
+#  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+#)
+
+#target_link_libraries(text_to_umrf
+#  ${catkin_LIBRARIES}
+#)  
 

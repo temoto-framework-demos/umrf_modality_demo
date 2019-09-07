@@ -3,7 +3,10 @@ import rospy
 import json
 import requests
 from std_msgs.msg import String
+from temoto_action_engine.msg import UmrfJsonGraph
 #TOD import custom temotoumrf ros message type
+
+tumrf_pub = rospy.Publisher('umrf_json_graphs', UmrfJsonGraph, queue_size=10)
 
 def callback(data):
     nl_chatter = data.data
@@ -12,12 +15,16 @@ def callback(data):
     json_tumrf_str = r.text #.encode("utf-8")
     json_tumrf = json.loads(json_tumrf_str)
     
-    wake_word = json_tumrf.get('wakeword')
+    wake_word = json_tumrf.get('wakeword').encode('ascii', 'ignore')
     del json_tumrf['wakeword']
 
+    graph_msg = UmrfJsonGraph()
+    graph_msg.targets.append(wake_word)
+    graph_msg.umrf_json_strings.append(json.dumps(json_tumrf))
+    tumrf_pub.publish(graph_msg)
 
 def listener():
-    rospy.init_node('listener')
+    rospy.init_node('tumrf_web_handler')
     rospy.Subscriber("chatter", String, callback)
     rospy.spin()
 
