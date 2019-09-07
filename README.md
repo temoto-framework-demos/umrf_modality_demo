@@ -3,9 +3,9 @@ Demo materials for ICRA 2020 paper.
 
 ## Usage
 This repository contains the state of catkin workspace of each robot in the demo. 
-* Master branch contains the common base code.
-* jackal-ws branch contains Clearpath Jackal + Jetson TX2 workspace
-* operator-ws branch contains packages necessary from the operator side 
+* ***master*** branch contains the common base code.
+* ***jackal-ws*** branch contains Clearpath Jackal + Jetson TX2 workspace
+* ***operator-ws*** branch contains packages necessary from the operator side 
 
 ``` bash
 git clone -b <platform-branch> https://github.com/temoto-telerobotics-demos/icra_2020_ws
