@@ -30,14 +30,14 @@ def drive():
     global ang_vel, lin_vel
     
     # Configure node and publisher
-    rospy.init_node('drive_host', anonymous=True)
+    rospy.init_node('drive_host', anonymous=False)
     vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
     #pub = rospy.Publisher('chatter', String, queue_size=10)
     rate = rospy.Rate(10) # 10hz
     
     # Get parameters
-    k_lin = rospy.get_param('gain/linear', 1.0)
-    k_ang = rospy.get_param('gain/angular', 1.0)
+    k_lin = rospy.get_param('gain/linear', 0.1)
+    k_ang = rospy.get_param('gain/angular', 0.1)
     
     # initialize velocity message
     vel_msg=Twist()
