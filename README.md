@@ -13,6 +13,11 @@ git submodule update --init --recursive
 cd icra_2020_ws
 ```
 
+If you want the latest versions of the submodules, then (after that the state of this workspace may not be the same as it was for the demo)
+``` bash
+git submodule foreach git pull origin master
+```
+
 Initialize the catkin workspace
 ``` bash
 catkin_make
