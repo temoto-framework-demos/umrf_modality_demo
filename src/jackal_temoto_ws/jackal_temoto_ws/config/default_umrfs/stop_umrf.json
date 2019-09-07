@@ -1,0 +1,1 @@
+{"name":"TaStop", "effect": "synchronous", "suffix":"0", "input_parameters":{"verb":{"pvf_type":"string", "pvf_value":"stop"}}}

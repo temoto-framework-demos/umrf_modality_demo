@@ -1,0 +1,3 @@
+gain:
+    linear:  .5
+    angular: .5

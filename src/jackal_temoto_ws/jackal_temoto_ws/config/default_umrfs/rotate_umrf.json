@@ -1,0 +1,1 @@
+{"name":"TaRotate", "effect": "synchronous", "suffix":"0", "input_parameters":{"angle":{"pvf_type":"number", "pvf_value":12.3},"verb":{"pvf_type":"string", "pvf_value":"rotate"}}}
