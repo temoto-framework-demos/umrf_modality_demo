@@ -54,7 +54,7 @@ void executeTemotoAction()
   if ((verb == "go")||(verb == "move")||(verb == "drive"))
   {
     // Initialize service client and message
-    ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("/lin_drive");
+    ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("lin_drive");
     drive_action_host::LinDrive lin_msg;
    
     // if direction = positive
@@ -108,7 +108,7 @@ void executeTemotoAction()
   else if ((verb == "rotate")||(verb=="turn"))
   {   	
    	// Initialize service client and message
-   	ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("/ang_drive");
+   	ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("ang_drive");
    	drive_action_host::AngDrive ang_msg;
    	
    	// if direction = positive (left, counterclockwise, anti

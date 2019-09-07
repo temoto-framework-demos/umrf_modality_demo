@@ -51,8 +51,8 @@ void executeTemotoAction()
   ros::NodeHandle nh;
   
   // Initialize service clients and messages
-  ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("/ang_drive");
-  ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("/lin_drive");
+  ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("ang_drive");
+  ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("lin_drive");
   drive_action_host::AngDrive ang_msg;
   drive_action_host::LinDrive lin_msg;
   
