@@ -41,12 +41,14 @@
   <build_depend>class_loader</build_depend>
   <build_depend>temoto_action_engine</build_depend>
   <build_depend>temoto_core</build_depend>
+  <build_depend>geometry_msgs</build_depend>
 
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>class_loader</exec_depend>
   <exec_depend>temoto_action_engine</exec_depend>
   <exec_depend>temoto_core</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

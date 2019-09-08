@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   temoto_action_engine
   temoto_core
-  drive_action_host
+  geometry_msgs
 )
 
 catkin_package()

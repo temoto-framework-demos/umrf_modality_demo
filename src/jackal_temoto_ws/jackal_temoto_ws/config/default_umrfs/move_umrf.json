@@ -1,1 +1,0 @@
-{"name":"MoveForward","suffix":"0","notation":"","effect":"synchronous","input_parameters":{"direction":{"pvf_type":"string", "pvf_value":"forward"},"verb":{"pvf_type":"string", "pvf_value":"move"}}}
