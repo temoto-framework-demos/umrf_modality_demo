@@ -54,24 +54,22 @@ void executeTemotoAction()
   if ((verb == "go")||(verb == "move")||(verb == "drive"))
   {
     // Initialize service client and message
-    ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("lin_drive");
+    ros::Publisher lin_drive_pub = nh.advertise<drive_action_host::LinDrive>("lin_drive", 10);
+    TEMOTO_INFO_STREAM("Waiting for subscribers");
+    while (lin_drive_pub.getNumSubscribers() < 1)
+    {
+      ros::Duration(0.1).sleep();
+    }
+
     drive_action_host::LinDrive lin_msg;
-   
     // if direction = positive
-    if ((direction == "foreward"||(direction == "forewards"))||(direction == "ahead")||(direction == "forth")||(direction == "ahead")||(direction == "fore"))
+    if ((direction == "forward"||(direction == "forwards"))||(direction == "ahead")||(direction == "forth")||(direction == "ahead")||(direction == "fore"))
     {
       // Complete message and call service to affect linear motion
-      lin_msg.request.move_fwd = true;
-      lin_msg.request.move_bkwd = false;
-      
-      if (lin_srv_client.call(lin_msg)) 
-      {
-        TEMOTO_INFO_STREAM("Linear Drive service response:" << lin_msg.response);
-      } 
-      else 
-      {
-        TEMOTO_ERROR("Failed to call Linear Drive service");
-      }
+      lin_msg.move_fwd = true;
+      lin_msg.move_bkwd = false;
+      lin_drive_pub.publish(lin_msg);
+      ros::Duration(0.5).sleep();
    	}
 
     // if direction = negative 
@@ -84,17 +82,10 @@ void executeTemotoAction()
              (direction == "aft")) 
     {
    		// Complete message and call service to affect linear motion
-   		lin_msg.request.move_fwd = false;
-   		lin_msg.request.move_bkwd = true;
-   		
-   		if (lin_srv_client.call(lin_msg)) 
-      {
-   			TEMOTO_INFO_STREAM("Linear Drive service response:" << lin_msg.response);
-   		} 
-      else 
-      {
-   			TEMOTO_ERROR("Failed to call Linear Drive service");
-   		}
+   		lin_msg.move_fwd = false;
+   		lin_msg.move_bkwd = true;
+   		lin_drive_pub.publish(lin_msg);
+      ros::Duration(0.5).sleep();
    	}
     // otherwise
     else 
@@ -108,42 +99,33 @@ void executeTemotoAction()
   else if ((verb == "rotate")||(verb=="turn"))
   {   	
    	// Initialize service client and message
-   	ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("ang_drive");
+    ros::Publisher ang_drive_pub = nh.advertise<drive_action_host::AngDrive>("ang_drive", 10);
    	drive_action_host::AngDrive ang_msg;
+
+    TEMOTO_INFO_STREAM("Waiting for subscribers");
+    while (ang_drive_pub.getNumSubscribers() < 1)
+    {
+      ros::Duration(0.1).sleep();
+    }
    	
    	// if direction = positive (left, counterclockwise, anti
    	if ((direction == "left")||(direction == "counter clockwise")||(direction == "anti clockwise")) {
 
    		// Complete message and call service to affect angular motion
-   		ang_msg.request.rotate_ccw = true;
-   		ang_msg.request.rotate_cw = false;
-   		
-   		if (ang_srv_client.call(ang_msg)) 
-      {
-   			TEMOTO_INFO_STREAM("Angular Drive service response:" << ang_msg.response);
-   		}
-      else 
-      {
-   			TEMOTO_ERROR("Failed to call Angular Drive service");
-   		}
+   		ang_msg.rotate_ccw = true;
+   		ang_msg.rotate_cw = false;
+   		ang_drive_pub.publish(ang_msg);
+      ros::Duration(0.5).sleep();
    	}
 
     // else if direction = negative (right, clockwise)
     else if ((direction == "right")||(direction == "clockwise"))
     {
    		// Complete message and call service to affect angular motion
-   		ang_msg.request.rotate_ccw = false;
-   		ang_msg.request.rotate_cw = true;
-   		
-   		if (ang_srv_client.call(ang_msg)) 
-      {
-   			TEMOTO_INFO_STREAM("Angular Drive service response: " << ang_msg.response);
-   		}
-      else 
-      {
-   			TEMOTO_ERROR("Failed to call Angular Drive service");
-   		}
-   		
+   		ang_msg.rotate_ccw = false;
+   		ang_msg.rotate_cw = true;
+   		ang_drive_pub.publish(ang_msg);
+      ros::Duration(0.5).sleep();
    	}
     else
     { 

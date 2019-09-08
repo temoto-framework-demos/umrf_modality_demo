@@ -51,31 +51,28 @@ void executeTemotoAction()
   ros::NodeHandle nh;
   
   // Initialize service clients and messages
-  ros::ServiceClient ang_srv_client = nh.serviceClient<drive_action_host::AngDrive>("ang_drive");
-  ros::ServiceClient lin_srv_client = nh.serviceClient<drive_action_host::LinDrive>("lin_drive");
+  ros::Publisher lin_drive_pub = nh.advertise<drive_action_host::LinDrive>("lin_drive", 10);
+  ros::Publisher ang_drive_pub = nh.advertise<drive_action_host::LinDrive>("ang_drive", 10);
+
+  TEMOTO_INFO_STREAM("Waiting for subscribers");
+  while ((ang_drive_pub.getNumSubscribers() < 1) || (lin_drive_pub.getNumSubscribers() < 1))
+  {
+    ros::Duration(0.1).sleep();
+  }
+
   drive_action_host::AngDrive ang_msg;
   drive_action_host::LinDrive lin_msg;
   
   // Complete message and call service to affect linear motion
-  ang_msg.request.rotate_cw = false;
-  ang_msg.request.rotate_ccw = false;
-  lin_msg.request.move_fwd = false;
-  lin_msg.request.move_bkwd = false;
+  ang_msg.rotate_cw = false;
+  ang_msg.rotate_ccw = false;
+  lin_msg.move_fwd = false;
+  lin_msg.move_bkwd = false;
   
   // Stop angular motion
-  if (ang_srv_client.call(ang_msg)) {
-     TEMOTO_INFO_STREAM("Angular Drive service response:" << ang_msg.response);
-  } else {
-     TEMOTO_ERROR("Failed to call Angular Drive service");
-  }
-  
-  // Stop linear motion
-  if (lin_srv_client.call(lin_msg)) {
-     TEMOTO_INFO_STREAM("Linear Drive service response:" << lin_msg.response);
-  } else {
-     TEMOTO_ERROR("Failed to call Linear Drive service");
-  }
-
+  lin_drive_pub.publish(lin_msg);
+  ang_drive_pub.publish(ang_msg);
+  ros::Duration(0.5).sleep();
 }
 
 // Destructor

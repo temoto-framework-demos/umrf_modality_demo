@@ -1,0 +1,2 @@
+bool rotate_cw
+bool rotate_ccw
