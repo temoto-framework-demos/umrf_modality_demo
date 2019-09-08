@@ -19,3 +19,18 @@
 [submodule "src/file_template_parser"]
 	path = src/file_template_parser
 	url = https://github.com/ut-ims-robotics/file_template_parser.git
+[submodule "src/human_tracking/openpose_gesture_control"]
+	path = src/human_tracking/openpose_gesture_control
+	url = https://github.com/ut-ims-robotics/openpose_gesture_control
+[submodule "src/human_tracking/openpose"]
+	path = src/human_tracking/openpose
+	url = https://github.com/CMU-Perceptual-Computing-Lab/openpose
+[submodule "src/human_tracking/vision_opencv"]
+	path = src/human_tracking/vision_opencv
+	url = https://github.com/ros-perception/vision_opencv
+[submodule "src/human_tracking/cv_camera"]
+	path = src/human_tracking/cv_camera
+	url = https://github.com/OTL/cv_camera
+[submodule "src/human_tracking/openpose_ros"]
+	path = src/human_tracking/openpose_ros
+	url = https://github.com/firephinx/openpose_ros
