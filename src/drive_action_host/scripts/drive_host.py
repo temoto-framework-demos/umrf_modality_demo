@@ -34,7 +34,7 @@ def drive():
 
     # Configure node and publisher
     rospy.init_node('drive_host', anonymous=False)
-    vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
     #pub = rospy.Publisher('chatter', String, queue_size=10)
     rate = rospy.Rate(10) # 10hz
 

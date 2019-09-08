@@ -46,6 +46,8 @@ void executeTemotoAction()
   // Input parameters
   std::string verb = GET_PARAMETER("verb", std::string);
   std::string direction = GET_PARAMETER("direction", std::string);
+
+	TEMOTO_INFO_STREAM("Got verb: " << verb << ", direction: " << direction);
   
   // Create a node handle
   ros::NodeHandle nh;
@@ -56,10 +58,7 @@ void executeTemotoAction()
     // Initialize service client and message
     ros::Publisher lin_drive_pub = nh.advertise<drive_action_host::LinDrive>("lin_drive", 10);
     TEMOTO_INFO_STREAM("Waiting for subscribers");
-    while (lin_drive_pub.getNumSubscribers() < 1)
-    {
-      ros::Duration(0.1).sleep();
-    }
+    
 
     drive_action_host::LinDrive lin_msg;
     // if direction = positive
