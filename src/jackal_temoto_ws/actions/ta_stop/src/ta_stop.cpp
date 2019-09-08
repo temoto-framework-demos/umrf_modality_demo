@@ -52,7 +52,7 @@ void executeTemotoAction()
   
   // Initialize service clients and messages
   ros::Publisher lin_drive_pub = nh.advertise<drive_action_host::LinDrive>("lin_drive", 10);
-  ros::Publisher ang_drive_pub = nh.advertise<drive_action_host::LinDrive>("ang_drive", 10);
+  ros::Publisher ang_drive_pub = nh.advertise<drive_action_host::AngDrive>("ang_drive", 10);
 
   TEMOTO_INFO_STREAM("Waiting for subscribers");
   while ((ang_drive_pub.getNumSubscribers() < 1) || (lin_drive_pub.getNumSubscribers() < 1))

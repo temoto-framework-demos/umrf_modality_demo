@@ -69,6 +69,8 @@ void executeTemotoAction()
       lin_msg.move_fwd = true;
       lin_msg.move_bkwd = false;
       lin_drive_pub.publish(lin_msg);
+      lin_drive_pub.publish(lin_msg);
+      lin_drive_pub.publish(lin_msg);
       ros::Duration(0.5).sleep();
    	}
 
@@ -85,6 +87,8 @@ void executeTemotoAction()
    		lin_msg.move_fwd = false;
    		lin_msg.move_bkwd = true;
    		lin_drive_pub.publish(lin_msg);
+      lin_drive_pub.publish(lin_msg);
+      lin_drive_pub.publish(lin_msg);
       ros::Duration(0.5).sleep();
    	}
     // otherwise
@@ -115,6 +119,8 @@ void executeTemotoAction()
    		ang_msg.rotate_ccw = true;
    		ang_msg.rotate_cw = false;
    		ang_drive_pub.publish(ang_msg);
+      ang_drive_pub.publish(ang_msg);
+      ang_drive_pub.publish(ang_msg);
       ros::Duration(0.5).sleep();
    	}
 
@@ -125,6 +131,8 @@ void executeTemotoAction()
    		ang_msg.rotate_ccw = false;
    		ang_msg.rotate_cw = true;
    		ang_drive_pub.publish(ang_msg);
+      ang_drive_pub.publish(ang_msg);
+      ang_drive_pub.publish(ang_msg);
       ros::Duration(0.5).sleep();
    	}
     else
