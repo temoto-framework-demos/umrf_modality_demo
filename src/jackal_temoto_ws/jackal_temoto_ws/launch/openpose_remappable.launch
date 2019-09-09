@@ -4,19 +4,19 @@
   <arg name="human_list" default="human_list" />
   <arg name="node_name" default="openpose_ros_node" />
 
-  <param name="$(arg node_name)/image_topic"  value="$(arg camera_data)" />
-  <param name="$(arg node_name)/output_topic" value="$(arg human_list)" />
+  <param name="/$(arg node_name)/image_topic"  value="$(arg camera_data)" />
+  <param name="/$(arg node_name)/output_topic" value="$(arg human_list)" />
 
   <!-- Start openpose_ros -->
   <node pkg="openpose_ros" type="openpose_ros_node" name="$(arg node_name)" output="screen">
-    <param name="input_image_transport_type" value="raw" />
-    <param name="display_output"             value="true" />
-    <param name="print_keypoints"            value="false" />
-    <param name="save_original_video"        value="false" />
-    <param name="save_openpose_video"        value="false" />
-    <param name="original_video_file_name"   value="original_video_output.avi" />
-    <param name="openpose_video_file_name"   value="openpose_video_output.avi" />
-    <param name="video_fps"                  value="10" />
+    <param name="/openpose_ros_node/input_image_transport_type" value="raw" />
+    <param name="/openpose_ros_node/display_output"             value="true" />
+    <param name="/openpose_ros_node/print_keypoints"            value="false" />
+    <param name="/openpose_ros_node/save_original_video"        value="false" />
+    <param name="/openpose_ros_node/save_openpose_video"        value="false" />
+    <param name="/openpose_ros_node/original_video_file_name"   value="original_video_output.avi" />
+    <param name="/openpose_ros_node/openpose_video_file_name"   value="openpose_video_output.avi" />
+    <param name="/openpose_ros_node/video_fps"                  value="10" />
   </node>
 
 </launch>
