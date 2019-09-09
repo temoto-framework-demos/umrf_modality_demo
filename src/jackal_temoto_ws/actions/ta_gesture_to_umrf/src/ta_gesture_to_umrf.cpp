@@ -48,6 +48,7 @@ void executeTemotoAction()
   detect_gestures = GET_PARAMETER("detect_gestures", std::string);
   umrf_target = GET_PARAMETER("umrf_target", std::string);
 
+  TEMOTO_INFO_STREAM("Starting the Gesture to UMRF parser (targeted to '" << umrf_target << "')");
   TEMOTO_INFO_STREAM("Invoking gesture detection pipe ...");
   cmi_.initialize(this);
   temoto_core::TopicContainer pipe_topics = cmi_.startPipe("gesture_detection");

@@ -1,0 +1,1 @@
+{"name":"TaGestureToUmrf","suffix":"0","effect":"asynchronous","input_parameters":{"detect_gestures":{"pvf_type":"string","pvf_value":"do it!"}, "umrf_target":{"pvf_type":"string","pvf_value":"Jack"}}}
