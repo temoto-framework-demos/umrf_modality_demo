@@ -169,8 +169,8 @@ std::string verb;
 std::string direction;
 float vel_lin_x = 0;
 float vel_ang_z = 0;
-float gain_linear = 0.1;
-float gain_angular = 0.1;
+float gain_linear = 0.15;
+float gain_angular = 0.4;
 
 }; // TaDrive class
 
