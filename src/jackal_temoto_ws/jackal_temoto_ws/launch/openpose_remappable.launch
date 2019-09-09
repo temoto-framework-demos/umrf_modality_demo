@@ -1,10 +1,15 @@
 <launch>
 
+  <arg name="camera_data" default="usb_cam/image_raw" />
+  <arg name="human_list" default="human_list" />
+  <arg name="node_name" default="openpose_ros_node" />
+
+  <param name="$(arg node_name)/image_topic"  value="$(arg camera_data)" />
+  <param name="$(arg node_name)/output_topic" value="$(arg human_list)" />
+
   <!-- Start openpose_ros -->
-  <node pkg="openpose_ros" type="openpose_ros_node" name="openpose_ros_node" output="screen">
-    <param name="image_topic"                value="/image_raw" />
+  <node pkg="openpose_ros" type="openpose_ros_node" name="$(arg node_name)" output="screen">
     <param name="input_image_transport_type" value="raw" />
-    <param name="output_topic"               value="/openpose_ros/human_list" />
     <param name="display_output"             value="true" />
     <param name="print_keypoints"            value="false" />
     <param name="save_original_video"        value="false" />

@@ -6,3 +6,22 @@ Components:
   output_topics:
     camera_data: "usb_cam/image_raw"
     camera_info: "usb_cam/camera_info"
+
+- component_name: "Open Pose Body Tracker"
+  component_type: "human_body_tracker"
+  package_name: "jackal_temoto_ws"
+  executable:  "openpose_remappable.launch"
+  input_topics:
+    camera_data: "usb_cam/image_raw"
+  output_topics:
+    human_list: "human_list"
+
+- component_name: "Body Gesture Recognizer"
+  component_type: "body_gesture_reckognizer"
+  package_name: "openpose_gesture_control"
+  executable:  "gesture_processing"
+  input_topics:
+    human_list: "human_list"
+  output_topics:
+    detected_gesture: "detected_gesture"
+

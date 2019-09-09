@@ -1,0 +1,1 @@
+{"name":"TaGestureToUmrf","package_name":"ta_gesture_to_umrf","effect":"asynchronous","input_parameters":{"detect_gestures":{"pvf_type":"string"}}}

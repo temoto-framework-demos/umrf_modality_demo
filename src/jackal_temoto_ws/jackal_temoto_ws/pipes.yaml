@@ -1,0 +1,19 @@
+
+---
+gesture_detection:
+- method:
+  - segment_type: "2d_camera"
+    output_topic_types:
+      - camera_data
+      
+  - segment_type: "human_body_tracker"
+    input_topic_types:
+      - camera_data
+    output_topic_types:
+      - human_list
+
+  - segment_type: "body_gesture_reckognizer"
+    input_topic_types:
+      - human_list
+    output_topic_types:
+      - detected_gesture
