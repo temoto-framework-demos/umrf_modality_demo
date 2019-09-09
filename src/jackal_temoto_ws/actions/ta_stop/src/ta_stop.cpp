@@ -59,7 +59,7 @@ void onParameterUpdate()
    * Construct UMRF manually
    */ 
   Umrf umrf;
-  umrf.setName("Nameless");
+  umrf.setName("TaDrive");
   umrf.setSuffix("0");
   umrf.setEffect("synchronous");
 
@@ -72,7 +72,7 @@ void onParameterUpdate()
    * Construct UMRF graph message
    */
   temoto_action_engine::UmrfJsonGraph umrf_graph_msg;
-  umrf_graph_msg.graph_name = "Web Agent Graph";
+  umrf_graph_msg.graph_name = "Drive Graph";
   umrf_graph_msg.umrf_json_strings.push_back(umrf_json_converter::toUmrfJsonStr(umrf));
   umrf_graph_msg.targets.push_back("Jack");
 

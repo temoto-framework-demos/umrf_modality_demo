@@ -77,7 +77,7 @@ void executeTemotoAction()
 void parseVerbalCommands()
 {
   TEMOTO_INFO_STREAM("Got a verbal command: verb = " << verb << "; direction = " << direction);
-  if(verb == "stop")
+  if(verb == "stop ")
   {
     vel_lin_x = 0;
     vel_ang_z = 0;
