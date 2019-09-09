@@ -1,7 +1,0 @@
-<launch>
-
-  <rosparam command="load" file="$(find drive_action_host)/config/drive_params.yaml"/>
-
-  <node name="drive_host" pkg="drive_action_host" type="drive_host.py" />
-
-</launch>
