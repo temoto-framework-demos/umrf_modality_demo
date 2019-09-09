@@ -1,7 +1,8 @@
 Components:
-- component_name: "TeMoto NL Terminal"
-  component_type: "human chatter"
-  package_name: "temoto_nlp"
-  executable:  "nl_terminal.launch"
+- component_name: "2D Camera"
+  component_type: "2d_camera"
+  package_name: "jackal_temoto_ws"
+  executable:  "usb_cam_remappable.launch"
   output_topics:
-    chatter_data: "human_chatter"
+    camera_data: "usb_cam/image_raw"
+    camera_info: "usb_cam/camera_info"
