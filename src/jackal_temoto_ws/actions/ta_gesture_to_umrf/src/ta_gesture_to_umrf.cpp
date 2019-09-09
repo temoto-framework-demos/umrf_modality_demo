@@ -75,7 +75,27 @@ void gestureCallback(const std_msgs::Int16& incoming_gesture_msg)
     TEMOTO_INFO_STREAM("Changed gesture to: " << gesture_msg_.data);
 
     // Publish an UMRF based on the detected gesture
-    if (gesture_msg_.data == 0)
+    if (gesture_msg_.data == -1 || gesture_msg_.data == 0)
+    {
+      umrf_json_graph_msg = generateUmrfGraphMsg("stop", "", umrf_target);
+    }
+    else if (gesture_msg_.data == 1 || gesture_msg_.data == 2)
+    {
+      umrf_json_graph_msg = generateUmrfGraphMsg("turn", "right", umrf_target);
+    }
+    else if (gesture_msg_.data == 3)
+    {
+      umrf_json_graph_msg = generateUmrfGraphMsg("move", "forward", umrf_target);
+    }
+    else if (gesture_msg_.data == 4 || gesture_msg_.data == 5)
+    {
+      umrf_json_graph_msg = generateUmrfGraphMsg("turn", "left", umrf_target);
+    }
+    else if (gesture_msg_.data == 6)
+    {
+      umrf_json_graph_msg = generateUmrfGraphMsg("go", "back", umrf_target);
+    }
+    else
     {
       umrf_json_graph_msg = generateUmrfGraphMsg("stop", "", umrf_target);
     }
