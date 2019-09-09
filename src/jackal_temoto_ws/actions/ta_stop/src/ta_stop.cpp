@@ -21,11 +21,10 @@
 #include <class_loader/class_loader.h>
 #include "ta_stop/temoto_action.h"
 #include "ta_stop/macros.h"
-
-// Include the service headers
-#include "drive_action_host/AngDrive.h"
-#include "drive_action_host/LinDrive.h"
-
+#include "temoto_action_engine/umrf_json_converter.h"
+#include "temoto_action_engine/umrf.h"
+#include "temoto_action_engine/UmrfJsonGraph.h"
+#include "ros/ros.h"
 
 /* 
  * ACTION IMPLEMENTATION of TaStop 
@@ -47,32 +46,38 @@ void executeTemotoAction()
   // Input parameters
   std::string verb = GET_PARAMETER("verb", std::string);
   
-  // Create a node handle
-  ros::NodeHandle nh;
-  
-  // Initialize service clients and messages
-  ros::Publisher lin_drive_pub = nh.advertise<drive_action_host::LinDrive>("lin_drive", 10);
-  ros::Publisher ang_drive_pub = nh.advertise<drive_action_host::AngDrive>("ang_drive", 10);
+  // Advertise the publisher
+  umrf_graph_pub_ = nh_.advertise<temoto_action_engine::UmrfJsonGraph>("/umrf_graph_topic", 1);
 
-  TEMOTO_INFO_STREAM("Waiting for subscribers");
-  while ((ang_drive_pub.getNumSubscribers() < 1) || (lin_drive_pub.getNumSubscribers() < 1))
-  {
-    ros::Duration(0.1).sleep();
-  }
+  // Execute the command
+  onParameterUpdate();
+}
 
-  drive_action_host::AngDrive ang_msg;
-  drive_action_host::LinDrive lin_msg;
-  
-  // Complete message and call service to affect linear motion
-  ang_msg.rotate_cw = false;
-  ang_msg.rotate_ccw = false;
-  lin_msg.move_fwd = false;
-  lin_msg.move_bkwd = false;
-  
-  // Stop angular motion
-  lin_drive_pub.publish(lin_msg);
-  ang_drive_pub.publish(ang_msg);
-  ros::Duration(0.5).sleep();
+void onParameterUpdate()
+{
+  /*
+   * Construct UMRF manually
+   */ 
+  Umrf umrf;
+  umrf.setName("Nameless");
+  umrf.setSuffix("0");
+  umrf.setEffect("synchronous");
+
+  ActionParameters ap;
+  ap.setParameter("direction", "string", boost::any_cast<std::string>(std::string("none")));
+  ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string("stop ")));
+  umrf.setInputParameters(ap);
+
+  /*
+   * Construct UMRF graph message
+   */
+  temoto_action_engine::UmrfJsonGraph umrf_graph_msg;
+  umrf_graph_msg.graph_name = "Web Agent Graph";
+  umrf_graph_msg.umrf_json_strings.push_back(umrf_json_converter::toUmrfJsonStr(umrf));
+  umrf_graph_msg.targets.push_back("Jack");
+
+  // Publish the message
+  umrf_graph_pub_.publish(umrf_graph_msg);
 }
 
 // Destructor
@@ -81,6 +86,9 @@ void executeTemotoAction()
   // ---> YOUR CONSTRUCTION ROUTINES HERE <--- //
   TEMOTO_PRINT_OF("Destructor", getUmrfPtr()->getName());
 }
+
+ros::NodeHandle nh_;
+ros::Publisher umrf_graph_pub_;
 
 }; // TaStop class
 

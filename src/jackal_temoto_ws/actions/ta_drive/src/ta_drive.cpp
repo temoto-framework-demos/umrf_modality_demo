@@ -77,7 +77,12 @@ void executeTemotoAction()
 void parseVerbalCommands()
 {
   TEMOTO_INFO_STREAM("Got a verbal command: verb = " << verb << "; direction = " << direction);
-  if ((verb == "go")||(verb == "move")||(verb == "drive"))
+  if(verb == "stop")
+  {
+    vel_lin_x = 0;
+    vel_ang_z = 0;
+  }
+  else if ((verb == "go")||(verb == "move")||(verb == "drive"))
   {
     /*
      * Handle translation commands
@@ -87,7 +92,7 @@ void parseVerbalCommands()
       // if direction = positive
       vel_lin_x = 1;
       vel_ang_z = 0;
-   	} 
+    } 
     else if ((direction == "backward") ||
              (direction == "rearward") ||
              (direction == "rearwards") ||
@@ -97,42 +102,42 @@ void parseVerbalCommands()
              (direction == "aft")) 
     {
       // if direction = negative
-   		vel_lin_x = -1;
+      vel_lin_x = -1;
       vel_ang_z = 0;
-   	}
+    }
     // otherwise
     else 
     {
-   		//direction error
-   		TEMOTO_ERROR("Can't move in that direction");
+      //direction error
+      TEMOTO_ERROR("Can't move in that direction");
       vel_lin_x = 0;
       vel_ang_z = 0;
-   	}
+    }
   } 
   else if ((verb == "rotate")||(verb=="turn"))
-  {   	
-   	/*
+  {     
+    /*
      * Handle rotation commands
      */
-   	if ((direction == "left")||(direction == "counter clockwise")||(direction == "anti clockwise"))
+    if ((direction == "left")||(direction == "counter clockwise")||(direction == "anti clockwise"))
     {
       // if direction = positive (left, counterclockwise, anti
       vel_lin_x = 0;
       vel_ang_z = 1;
-   	}
+    }
     else if ((direction == "right")||(direction == "clockwise"))
     {
       // else if direction = negative (right, clockwise)
-   		vel_lin_x = 0;
+      vel_lin_x = 0;
       vel_ang_z = -1;
-   	}
+    }
     else
     { 
-   		//direction error
-   		TEMOTO_ERROR("Can't turn in that direction");
+      //direction error
+      TEMOTO_ERROR("Can't turn in that direction");
       vel_lin_x = 0;
-      vel_ang_z = 0; 	
-   	}
+      vel_ang_z = 0;   
+    }
   }
   else 
   {
