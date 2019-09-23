@@ -5,7 +5,7 @@ Demo materials for ICRA 2020 paper.
 ***operator-ws*** branch contains packages necessary from the operator side
 
 ``` bash
-git clone -b <platform-branch> https://github.com/temoto-telerobotics-demos/icra_2020_ws
+git clone -b operator-ws https://github.com/temoto-telerobotics-demos/icra_2020_ws
 git submodule update --init --recursive
 cd icra_2020_ws
 ```
