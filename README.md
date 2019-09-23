@@ -1,4 +1,4 @@
-# icra_2020_ws – Jackal Workspace
+# icra_2020_ws – Operator Workspace
 Demo materials for ICRA 2020 paper. 
 
 ## Setup
