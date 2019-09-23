@@ -5,6 +5,7 @@ lib/
 .vscode/
 .catkin_tools/
 .catkin_workspace
+*.save
 src/CMakeLists.txt
 src/google_speech_to_text
 *.so

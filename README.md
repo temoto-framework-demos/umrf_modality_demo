@@ -1,11 +1,8 @@
-# icra_2020_ws
-Demo materials for ICRA 2020 paper.
+# icra_2020_ws – Jackal Workspace
+Demo materials for ICRA 2020 paper. 
 
-## Usage
-This repository contains the state of catkin workspace of each robot in the demo. 
-* ***master*** branch contains the common base code.
-* ***jackal-ws*** branch contains Clearpath Jackal + Jetson TX2 workspace
-* ***operator-ws*** branch contains packages necessary from the operator side 
+## Setup
+***operator-ws*** branch contains packages necessary from the operator side
 
 ``` bash
 git clone -b <platform-branch> https://github.com/temoto-telerobotics-demos/icra_2020_ws
@@ -20,7 +17,22 @@ git submodule foreach git pull origin master
 
 Initialize the catkin workspace
 ``` bash
-catkin_make
+catkin build
 ```
 
-From now on use *catkin_make* or *catkin build*
+## Usage
+
+Launch TeMoto:
+```
+roslaunch operator_temoto_ws temoto.launch
+```
+
+Invoke the natural language processing pipeline (speech_to_text→text_to_umrf_parser) via TeMoto Action:
+```
+rosrun temoto_action_engine parser_node ./icra_2020_ws/src/operator_temoto_ws/operator_temoto_ws/config/default_umrfs umrf_list.txt Operator
+```
+The parser node does nothing more than just reading in a UMRF JSON file and publishing it as UMRF Graph message with "Operator" as a wake word.
+
+<br></br>
+
+Now "Operator" system should be actively parsing speech to UMRF Graph messages, targeted to "Jack".
