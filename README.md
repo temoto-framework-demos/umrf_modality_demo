@@ -1,14 +1,10 @@
-# icra_2020_ws
+# icra_2020_ws – Jackal Workspace
 Demo materials for ICRA 2020 paper.
 
-## Usage
-This repository contains the state of catkin workspace of each robot in the demo. 
-* ***master*** branch contains the common base code.
-* ***jackal-ws*** branch contains Clearpath Jackal + Jetson TX2 workspace
-* ***operator-ws*** branch contains packages necessary from the operator side 
+## Setup
 
 ``` bash
-git clone -b <platform-branch> https://github.com/temoto-telerobotics-demos/icra_2020_ws
+git clone -b jackal-ws https://github.com/temoto-telerobotics-demos/icra_2020_ws
 git submodule update --init --recursive
 cd icra_2020_ws
 ```
@@ -20,7 +16,23 @@ git submodule foreach git pull origin master
 
 Initialize the catkin workspace
 ``` bash
-catkin_make
+catkin build
 ```
 
-From now on use *catkin_make* or *catkin build*
+## Usage
+Jackal related hardware divers are expected to be running when the system starts up.
+
+Launch TeMoto:
+```
+roslaunch jackal_temoto_ws temoto.launch
+```
+
+Invoke the human tracking pipeline (camera→gesture_recognizer→gesture_to_umrf_parser) via TeMoto Action:
+```
+rosrun temoto_action_engine parser_node <icra_2020_ws>/src/jackal_temoto_ws/jackal_temoto_ws/config/default_umrfs/ umrf_list_gesture_parser.txt Jack
+```
+The parser node does nothing more than just read in a UMRF JSON file and publishes it as UMRF Graph message with "Jack" as a wake word.
+
+<br></br>
+
+Now "Jack" should be listening to UMRF Graph messages and interpret body gestures as movement commands.
