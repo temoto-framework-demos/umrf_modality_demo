@@ -123,13 +123,14 @@ temoto_action_engine::UmrfJsonGraph generateUmrfGraphMsg(const std::string& verb
 
   if (verb == "stop")
   {
-    umrf_graph_msg.graph_name = "Stop Graph";
-    umrf.setName("TaStop");
+    umrf_graph_msg.graph_name = "Drive Graph";
+    umrf.setName("TaDrive");
     umrf.setSuffix("0");
-    umrf.setEffect("aynchronous");
+    umrf.setEffect("synchronous");
 
     ActionParameters ap;
-    ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string(verb)));
+    ap.setParameter("direction", "string", boost::any_cast<std::string>(std::string("none")));
+    ap.setParameter("verb", "string", boost::any_cast<std::string>(std::string("stop "))); // the whitespace is deliberate
     umrf.setInputParameters(ap);
   }
   else
@@ -137,7 +138,7 @@ temoto_action_engine::UmrfJsonGraph generateUmrfGraphMsg(const std::string& verb
     umrf_graph_msg.graph_name = "Drive Graph";
     umrf.setName("TaDrive");
     umrf.setSuffix("0");
-    umrf.setEffect("aynchronous");
+    umrf.setEffect("synchronous");
 
     ActionParameters ap;
     ap.setParameter("direction", "string", boost::any_cast<std::string>(std::string(direction)));
