@@ -18,9 +18,7 @@ If you want the latest versions of the submodules, then (after that the state of
 git submodule foreach git pull origin master
 ```
 
-Initialize the catkin workspace
+Build the workspace
 ``` bash
-catkin_make
+catkin build
 ```
-
-From now on use *catkin_make* or *catkin build*
