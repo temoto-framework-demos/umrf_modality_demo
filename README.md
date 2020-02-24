@@ -1,12 +1,12 @@
-# icra_2020_ws – Jackal Workspace
-Demo materials for ICRA 2020 paper.
+# iros_2020_ws – Jackal Workspace
+Demo materials for iros 2020 paper.
 
 ## Setup
 
 ``` bash
-git clone -b jackal-ws https://github.com/temoto-telerobotics-demos/icra_2020_ws
+git clone -b jackal-ws https://github.com/temoto-telerobotics-demos/iros_2020_ws
 git submodule update --init --recursive
-cd icra_2020_ws
+cd iros_2020_ws
 ```
 
 If you want the latest versions of the submodules, then (after that the state of this workspace may not be the same as it was for the demo)
@@ -29,7 +29,7 @@ roslaunch jackal_temoto_ws temoto.launch
 
 Invoke the human tracking pipeline (camera→gesture_recognizer→gesture_to_umrf_parser) via TeMoto Action:
 ```
-rosrun temoto_action_engine parser_node <icra_2020_ws>/src/jackal_temoto_ws/jackal_temoto_ws/config/default_umrfs/ umrf_list_gesture_parser.txt Jack
+rosrun temoto_action_engine parser_node <iros_2020_ws>/src/jackal_temoto_ws/jackal_temoto_ws/config/default_umrfs/ umrf_list_gesture_parser.txt Jack
 ```
 The parser node does nothing more than just read in a UMRF JSON file and publishes it as UMRF Graph message with "Jack" as a wake word.
 
