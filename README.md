@@ -1,13 +1,13 @@
-# iros_2020_ws – Operator Workspace
-Demo materials for iros 2020 paper. 
+# umrf_modality_demo – Operator Workspace
+Setup of UMRF command modality demo. 
 
 ## Setup
 ***operator-ws*** branch contains packages necessary from the operator side
 
 ``` bash
-git clone -b operator-ws https://github.com/temoto-telerobotics-demos/iros_2020_ws
+git clone -b operator-ws https://github.com/temoto-telerobotics-demos/umrf_modality_demo
 git submodule update --init --recursive
-cd iros_2020_ws
+cd umrf_modality_demo
 ```
 
 If you want the latest versions of the submodules, then (after that the state of this workspace may not be the same as it was for the demo)
@@ -29,7 +29,7 @@ roslaunch operator_temoto_ws temoto.launch
 
 Invoke the natural language processing pipeline (speech_to_text→text_to_umrf_parser) via TeMoto Action:
 ```
-rosrun temoto_action_engine parser_node ./iros_2020_ws/src/operator_temoto_ws/operator_temoto_ws/config/default_umrfs umrf_list.txt Operator
+rosrun temoto_action_engine parser_node ./umrf_modality_demo/src/operator_temoto_ws/operator_temoto_ws/config/default_umrfs umrf_list.txt Operator
 ```
 The parser node does nothing more than just reading in a UMRF JSON file and publishing it as UMRF Graph message with "Operator" as a wake word.
 
